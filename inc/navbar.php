@@ -29,7 +29,9 @@
           <button class = 'button button3'>
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;<i class='fas fa-user-astronaut' style='font-size:24px'></i></a>
           <div class="dropdown-menu" style="right: 0; left: auto;">
-            <a class="dropdown-item" href="#">Sign Out</a>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+              <a type = 'submit' class="dropdown-item" href="<?php echo ROOT_URL?>/signout.php">Sign Out</a>
+            </form>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#"><?php echo 'name' ?></a>
           </div>

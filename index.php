@@ -1,10 +1,13 @@
 <?php session_start(); ?>
-<?php include('inc/header.php'); ?>
-<?php if (!isset($_SESSION['logged_in'])) {
-    header('Location: signup.php');
+<?php if (!isset($_SESSION['logged_in']) ) {
+    include('signup.php');
     exit();
-} else {
-    header('Location: home.php');
-    exit();
+} else { 
+    if ($_SESSION['logged_in'] == false) {
+        include('signup.php');
+        exit();
+    } else {
+        include('home.php');
+        exit();
+    }
 } ?>
-<?php include('inc/footer.php'); ?>

@@ -32,8 +32,11 @@
     .button5 {border-radius: 50%;}
     </style>
 
-    <?php if (basename($_SERVER['PHP_SELF']) == 'signup.php' or basename($_SERVER['PHP_SELF']) == 'index.php') {
-        include('navbar-login.php');
-    } else {
-        include('navbar.php');
-    } ?>
+    <?php if (session_status() === PHP_SESSION_NONE) {
+            include('navbar-login.php'); 
+        } else {
+        if (!isset($_SESSION['logged_in']) or !$_SESSION['logged_in']) {
+            include('navbar-login.php');
+        } else {
+            include('navbar.php');
+        }} ?>

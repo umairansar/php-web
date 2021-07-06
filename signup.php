@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}?>
 
 <?php 
     //Connection
@@ -28,9 +30,8 @@
                 //Passed
                 //Recepient Email
                 $toEmail = "shiatsaansar60@gmail.com";   
-                $_SESSION["logged_in"] = 'true'; 
+                $_SESSION["logged_in"] = true; 
                 echo $_SESSION["logged_in"];
-                sleep(5);
                 header('Location: home.php');
                 
             }
