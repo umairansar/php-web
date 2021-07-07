@@ -59,7 +59,7 @@
 
         createUser($conn, $name, $email, $usernamme, $password);
 
-        if (!empty($email) && !empty($name) && !empty($password)){
+        /*if (!empty($email) && !empty($name) && !empty($password)){
             //Passed
             //Check Email
             if (filter_var($email, FILTER_VALIDATE_EMAIL) === false){
@@ -85,7 +85,7 @@
             $_SESSION['POST'] = $_POST;
             header('Location: '.ROOT_URL);
             exit();
-        }
+        }*/
     } 
 
 ?>
