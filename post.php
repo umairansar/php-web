@@ -8,6 +8,8 @@
 require_once('config/config.php');
 require_once('config/db.php');
 
+
+
 //check for delete
 if(isset($_POST['delete'])){
     //Get form data
