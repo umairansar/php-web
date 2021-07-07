@@ -32,7 +32,7 @@
             exit();
         }
 
-        if (invalidUsername($email)) {
+        if (invalidUsername($username)) {
             redirectWithAlert('Please enter valid username.');
             exit();
         }
@@ -57,7 +57,7 @@
             exit();
         }
 
-        createUser($conn, $name, $email, $usernamme, $password);
+        createUser($conn, $name, $email, $username, $password);
 
         /*if (!empty($email) && !empty($name) && !empty($password)){
             //Passed

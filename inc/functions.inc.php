@@ -12,7 +12,7 @@ require_once('../config/db.php');
   signify an error with a redirect to signup page.
 */
 function redirectWithAlert($alert) {
-    $_SESSION['msg'] = 'Please fill in all fields.';
+    $_SESSION['msg'] = $alert;
     $_SESSION['msgClass'] = 'alert-danger';
     $_SESSION['POST'] = $_POST;
     header('Location: '.ROOT_URL);
@@ -32,12 +32,12 @@ function invalidEmail($email) {
 }
 
 function notSamePwd($password, $passwordCnf) {
-    return !($password == !$passwordCnf);
+    return !($password == $passwordCnf);
 }
 
 function usernameTaken($conn, $username) {
     $sql = "SELECT * from users WHERE userUid = ?;";
-    $stmt = mysqli_stml_init($conn);
+    $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         redirectWithAlert('Prepared Stmt Failed.');
         exit();
@@ -56,7 +56,7 @@ function usernameTaken($conn, $username) {
 
 function emailTaken($conn, $email) {
     $sql = "SELECT * from users WHERE userEmail = ?;";
-    $stmt = mysqli_stml_init($conn);
+    $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         redirectWithAlert('Prepared Stmt Failed.');
         exit();
@@ -73,15 +73,15 @@ function emailTaken($conn, $email) {
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $name, $email, $usernamme, $password) {
+function createUser($conn, $name, $email, $username, $password) {
     $sql = "INSERT INTO users (userName, userEmail, userUid, userPwd) values (?, ?, ?, ?);";
-    $stmt = mysqli_stml_init($conn);
+    $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         redirectWithAlert('Prepared Stmt Failed.');
         exit();
     } 
     $hashpwd = password_hash($password, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $usernamme, $hashpwd);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $email, $username, $hashpwd);
     mysqli_stmt_execute($stmt); 
     mysqli_stmt_close($stmt); 
     $_SESSION["logged_in"] = true; 
