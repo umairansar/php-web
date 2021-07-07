@@ -51,40 +51,52 @@
     <div class="container" style = "width: 25%;">
         
         <h2 style="text-align: center;"><br>Sign up</h2>
+
+        <!-- Start Form -->
         <form method="post" action="<?php echo ROOT_URL; ?>inc/signup.inc.php">
             <div style="line-height: 55%;"><br></div>
+            
+            <!-- Form Inputs -->
             <div class="form-group">
-            <div class="form-floating mb-1">
-                <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" 
-                value = "<?php echo isset($_POST['name']) ? $name : ''; ?>">
-                <label for="floatingName">Name</label>
-            </div>
-            <div class="form-floating mb-1">
-                <input type="text" class="form-control" name="email" id="floatingInput" placeholder="Email"
-                value = "<?php echo isset($_POST['email']) ? $email : ''; ?>">
-                <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating mb-1">
-                <input type="text" class="form-control" name="username" id="floatingUsername" placeholder="Username"
-                value = "<?php echo isset($_POST['username']) ? $username : ''; ?>">
-                <label for="floatingUsername">Username</label>
-            </div>
-            <div class="form-floating mb-1">
-                <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="pwd"
-                value = "<?php echo isset($_POST['password']) ? $password : ''; ?>">
-                <label for="floatingPassword">Password</label>
-            </div>
-            <div class="form-floating">
-                <input type="password" class="form-control" name="passwordCnf" id="floatingPasswordCnf" placeholder="pwd"
-                value = "<?php echo isset($_POST['passwordCnf']) ? $passwordCnf : ''; ?>">
-                <label for="floatingPasswordCnf">Confirm Password</label>
-            </div>
-            <br>
-            <?php if($msg != ''): ?>
-            <div class = "alert <?php echo $msgClass; ?>"><?php echo $msg; ?></div>
-            <?php endif; ?>
-            <button type = "submit" name = "submit" class = "btn btn-primary" style="width: 100%;">Register</button>
-            <p style="text-align: center;">Already registered? <a href="login.php" style="color: #467eb8;">Login</a></p>
+                <div class="form-floating mb-1">
+                    <input type="text" class="form-control" name="name" id="floatingName" placeholder="Name" 
+                    value = "<?php echo isset($_SESSION['POST']['name']) ? $_SESSION['POST']['name'] : ''; ?>">
+                    <label for="floatingName">Name</label>
+                </div>
+                <div class="form-floating mb-1">
+                    <input type="text" class="form-control" name="email" id="floatingInput" placeholder="Email"
+                    value = "<?php echo isset($_SESSION['POST']['email']) ? $_SESSION['POST']['email'] : ''; ?>">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating mb-1">
+                    <input type="text" class="form-control" name="username" id="floatingUsername" placeholder="Username"
+                    value = "<?php echo isset($_SESSION['POST']['username']) ? $_SESSION['POST']['username'] : ''; ?>">
+                    <label for="floatingUsername">Username</label>
+                </div>
+                <div class="form-floating mb-1">
+                    <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="pwd"
+                    value = "<?php echo isset($_SESSION['POST']['password']) ? $_SESSION['POST']['password'] :  ''; ?>">
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" name="passwordCnf" id="floatingPasswordCnf" placeholder="pwd"
+                    value = "<?php echo isset($_SESSION['POST']['passwordCnf']) ? $_SESSION['POST']['passwordCnf'] :  ''; ?>">
+                    <label for="floatingPasswordCnf">Confirm Password</label>
+                </div>
+                <br>
+
+                <!-- Checking for alerts in Session, if any-->
+                <?php if(isset($_SESSION['msg']) and $_SESSION['msg'] != ''): ?>
+                    <div class = "alert <?php echo $_SESSION['msgClass']; ?>"><?php echo $_SESSION['msg']; ?></div>
+                    <?php unset($_SESSION['msg']); unset($_SESSION['msgClass']); ?>
+                <?php endif; ?>
+
+                <!-- UNSET SESSION[POST] for value = ..., if exists-->
+                <?php if (isset($_SESSION['POST'])) {unset($_SESSION['POST']); } ?>
+                
+                <!-- Register Button -->
+                <button type = "submit" name = "submit" class = "btn btn-primary" style="width: 100%;">Register</button>
+                <p style="text-align: center;">Already registered? <a href="login.php" style="color: #467eb8;">Login</a></p>
             </div>
             
             
