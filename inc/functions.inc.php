@@ -11,6 +11,8 @@ require_once('../config/db.php');
   THis leads signup.ini.inc to skip the if block which would otherwise 
   signify an error with a redirect to signup page.
 */
+
+// Sign Up Functions
 function redirectWithAlert($alert, $from) {
     $_SESSION['msg'] = $alert;
     $_SESSION['msgClass'] = 'alert-danger';
@@ -92,6 +94,7 @@ function createUser($conn, $name, $email, $username, $password) {
     exit();  
 }
 
+//Login Function
 function emptyfieldsLogin($username, $password) {
     return !(!empty($username) && !empty($password));
 }

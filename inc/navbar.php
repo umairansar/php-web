@@ -33,7 +33,7 @@
               <a type = 'submit' class="dropdown-item" href="<?php echo ROOT_URL?>/signout.php">Sign Out</a>
             </form>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><?php echo 'name' ?></a>
+            <a class="dropdown-item" href="#"><?php echo $_SESSION['userUid']; ?></a>
           </div>
           </button>
           
