@@ -3,6 +3,10 @@
 }?>
 
 <?php 
+    if (isset($_SESSION['via'])) {
+        unset($_SESSION['via']);
+    }
+
     //Connection
     /*require_once('config/config.php');
     require_once('config/db.php');
@@ -51,22 +55,33 @@
     <div class="container" style = "width: 25%;">
         
         <h2 style="text-align: center;"><br>Log In</h2>
-        <form method="post" action="login.inc.php">
+        <form method="post" action="inc/login.inc.php">
             <div style="line-height: 55%;"><br></div>
+            
             <div class="form-group">
                 <div class="form-floating mb-1">
                     <input type="text" class="form-control" name="username" id="floatingUsername" placeholder="Username/Email"
-                    value = "<?php echo isset($_POST['username']) ? $username : ''; ?>">
+                    value = "<?php echo isset($_SESSION['POST']['username']) ? $_SESSION['POST']['username'] : ''; ?>">
                     <label for="floatingUsername">Username/Email</label>
                 </div>
                 <div class="form-floating mb-1">
                     <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="pwd"
-                    value = "<?php echo isset($_POST['password']) ? $password : ''; ?>">
+                    value = "<?php echo isset($_SESSION['POST']['password']) ? $_SESSION['POST']['password'] :  ''; ?>">
                     <label for="floatingPassword">Password</label>
                 </div>
                 <br>
-                <button type = "submit" name = "submit" class = "btn btn-primary" style="width: 100%;">Register</button>
-                <p style="text-align: center;">Not registered? <a href="<?php echo ROOT_URL; ?>" style="color: #467eb8;">Sign up</a></p>
+
+                <!-- Checking for alerts in Session, if any-->
+                <?php if(isset($_SESSION['msg']) and $_SESSION['msg'] != ''): ?>
+                    <div class = "alert <?php echo $_SESSION['msgClass']; ?>"><?php echo $_SESSION['msg']; ?></div>
+                    <?php unset($_SESSION['msg']); unset($_SESSION['msgClass']); ?>
+                <?php endif; ?>
+
+                <!-- UNSET SESSION[POST] for value = ..., if exists-->
+                <?php if (isset($_SESSION['POST'])) {unset($_SESSION['POST']); } ?>
+
+                <button type = "submit" name = "submit" class = "btn btn-primary" style="width: 100%;">Log In</button>
+                <p style="text-align: center;">Not registered? <a type="submit" href="<?php echo "inc/login.inc.php"; ?>" style="color: #467eb8;">Sign up</a></p>
             </div>
             
             

@@ -35,7 +35,7 @@
     <?php if (session_status() === PHP_SESSION_NONE) {
             include('navbar-login.php'); 
         } else {
-        if (!isset($_SESSION['logged_in']) or !$_SESSION['logged_in']) {
+        if (!isset($_SESSION['log_in']) or !$_SESSION['log_in']) {
             include('navbar-login.php');
         } else {
             include('navbar.php');

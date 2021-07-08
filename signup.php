@@ -3,6 +3,11 @@
 }?>
 
 <?php 
+    if (isset($_SESSION['via'])) {
+        unset($_SESSION['via']);
+    }
+
+    
     //Connection
     /*require_once('config/config.php');
     require_once('config/db.php');
@@ -96,7 +101,7 @@
                 
                 <!-- Register Button -->
                 <button type = "submit" name = "submit" class = "btn btn-primary" style="width: 100%;">Register</button>
-                <p style="text-align: center;">Already registered? <a href="login.php" style="color: #467eb8;">Login</a></p>
+                <p style="text-align: center;">Already registered? <a type="submit" href="<?php echo "inc/signup.inc.php"; ?>" style="color: #467eb8;">Login</a></p>
             </div>
             
             

@@ -6,8 +6,9 @@
   require_once('config/config.php');
   require_once('config/db.php');
 
-  $_SESSION['logged_in'] = false;
-  session_destroy();
+  $_SESSION['log_in'] = false;
+  unset($_SESSION['userUid']);
+  unset($_SESSION['userId']);
   header('Location: '.ROOT_URL);
   exit();
 ?>

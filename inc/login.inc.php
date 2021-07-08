@@ -4,44 +4,32 @@
 
 <?php 
     //Connection
-    require_once('config/config.php');
-    require_once('config/db.php');
+    require_once('../config/config.php');
+    require_once('../config/db.php');
+    require_once('functions.inc.php');
 
     //Message Vars
-    $msg = '';
-    $msgClass = '';
+    $_SESSION['msg'] = '';
+    $_SESSION['msgClass'] = '';
    
     //Check for submit
-    if(filter_has_var(INPUT_POST, 'submit')) {
+    if(!filter_has_var(INPUT_POST, 'submit')) {
+        //Access to page without submitting
+        $_SESSION['via'] = 'log_in'; 
+        header('Location: '.ROOT_URL);
+        exit();
+    } else {
+        //Proper way to access
         //Get for data
-        $name = htmlspecialchars($_POST['name']);
-        $email = htmlspecialchars($_POST['email']);
         $username = htmlspecialchars($_POST['username']);
         $password = htmlspecialchars($_POST['password']);
-        $passwordCnf = htmlspecialchars($_POST['passwordCnf']);
         
         //Check required fields
-        if (!empty($email) && !empty($name) && !empty($password)){
-            //Passed
-            //Check Email
-            if (filter_var($email, FILTER_VALIDATE_EMAIL) === false){
-                //Failed
-                $msg = 'Please enter valid email.';
-                $msgClass = 'alert-danger';
-            } else {
-                //Passed
-                //Recepient Email
-                $toEmail = "shiatsaansar60@gmail.com";   
-                $_SESSION["logged_in"] = true; 
-                echo $_SESSION["logged_in"];
-                header('Location: ../home.php');
-                
-            }
-            
-        } else {
-            //Failed
-            $msg = 'Please fill in all fields.';
-            $msgClass = 'alert-danger';
+        if (emptyfieldsLogin($username, $password)) {
+            redirectWithAlert('Please fill in all fields.', 'log_in');
+            exit();
         }
-    }
-?>
+
+        loginUser($conn, $username, $password);
+
+        }
