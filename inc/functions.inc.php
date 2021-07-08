@@ -106,8 +106,7 @@ function loginUser($conn, $username, $password){
             $var = $emailExists;
         } else {
             //nothing exists
-            echo("<script>console.log('PHP: " . $emailExists . " " .$usernameExists. "');</script>");
-            redirectWithAlert($usernameExists.'Username/Email does not exist.'.$emailExists, 'log_in');
+            redirectWithAlert($usernameExists.'Username/Email does not exist.', 'log_in');
             exit();
         }
     }
@@ -120,7 +119,7 @@ function loginUser($conn, $username, $password){
         header('Location: '.ROOT_URL);
         exit();  
     } else {
-        redirectWithAlert('User/Password combinition is incorrect.'.$password.' '.$var .' '.$pwdHash.strlen($pwdHash).json_encode($usernameExists).json_encode($emailExists), 'log_in');
+        redirectWithAlert('User/Password combinition is incorrect.', 'log_in');
         exit();
     }
 }

@@ -24,7 +24,7 @@ mysqli_free_result($result);
 mysqli_close($conn);
 ?>
 
-<?php include('inc/header.php'); echo $_SESSION['log_in']; print_r($_SESSION);?>
+<?php include('inc/header.php'); ?>
     <div class = "container">
         <small><br></small>
         <h1>Posts</h1>
